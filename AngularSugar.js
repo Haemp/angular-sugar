@@ -7,7 +7,7 @@ AngularSugar.directive('asEnter', function($parse){
                                 
 			element.on('keyup', function( e ){
 				if( e.keyCode == 13 ){
-					$scope.$apply($parse(attr.ngEnter));
+					$scope.$apply($parse(attr.asEnter));
 				}
 			})
 		}
@@ -21,7 +21,7 @@ AngularSugar.directive('asEsc', function($parse){
                                 
 			element.on('keyup', function( e ){
 				if( e.keyCode == 27 ){
-					$scope.$apply($parse(attr.ngEsc));
+					$scope.$apply($parse(attr.asEsc));
 				}
 			})
 		}
