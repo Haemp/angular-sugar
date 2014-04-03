@@ -53,7 +53,7 @@ AngularSugar.service('asUtility', function(){
 });
 
 
-AngularSugar.directive('ahTouchActive', function(){
+AngularSugar.directive('asTouchActive', function(){
 	return{
 		link: function( $scope, element, attr ){
 			element.on('touchstart', function(){
