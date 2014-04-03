@@ -4,7 +4,7 @@ AngularSugar.directive('asEnter', function($parse){
 
 	return{
 		link: function( $scope, element, attr ){
-                                
+
 			element.on('keyup', function( e ){
 				if( e.keyCode == 13 ){
 					$scope.$apply($parse(attr.asEnter));
@@ -18,7 +18,7 @@ AngularSugar.directive('asEsc', function($parse){
 
 	return{
 		link: function( $scope, element, attr ){
-                                
+
 			element.on('keyup', function( e ){
 				if( e.keyCode == 27 ){
 					$scope.$apply($parse(attr.asEsc));
@@ -37,7 +37,7 @@ AngularSugar.service('asUtility', function(){
 	var self = this;
 
 	self.pollFunction = function( callFunction, interval, initial ){
-		
+
 		function pollingFunction(){
 			$timeout(function(){
 				callFunction();
@@ -45,9 +45,26 @@ AngularSugar.service('asUtility', function(){
 			},interval)
 		}
 		pollingFunction();
-		
+
 		if( initial )
 			callFunction();
 	}
 
+});
+
+
+AngularSugar.directive('ahTouchActive', function(){
+	return{
+		link: function( $scope, element, attr ){
+			element.on('touchstart', function(){
+				element.addClass('active');
+			});
+			element.on('touchmove', function(){
+				element.removeClass('active');
+			});
+			element.on('touchend', function(){
+				element.removeClass('active');
+			})
+		}
+	}
 });
