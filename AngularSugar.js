@@ -36,6 +36,7 @@ AngularSugar.service('Browser', function(){
 AngularSugar.service('asUtility', function( $timeout ){
 	var self = this;
 
+
 	self.pollFunction = function( callFunction, interval, initial ){
 
 		function pollingFunction(){
@@ -53,16 +54,29 @@ AngularSugar.service('asUtility', function( $timeout ){
 });
 
 
-AngularSugar.directive('asTouchActive', function(){
+AngularSugar.directive('asTouchActive', function( $timeout ){
 	return{
 		link: function( $scope, element, attr ){
+
+			var moved = false;
 			element.on('touchstart', function(){
-				element.addClass('active');
+				$timeout(function(){
+
+
+					if( !moved ){
+						element.addClass('active');
+					}else{
+						moved = false;
+					}
+
+				}, 20);
 			});
 			element.on('touchmove', function(){
+				moved = true
 				element.removeClass('active');
 			});
 			element.on('touchend', function(){
+				moved = false;
 				element.removeClass('active');
 			})
 		}
