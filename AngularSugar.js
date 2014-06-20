@@ -154,20 +154,22 @@ AngularSugar.service('PromiseSerializer', function( $q ){
 	self.decorate = function(obj, methods){
 		obj.lastPromise = $q.when();
 		for(var i = 0; i < methods.length; i++){
-			
+
 			(function(){
 				var index = i;
 				obj['serial_'+methods[index]] = function(){
-					
+
 					var params = arguments;
-					
-					obj.lastPromise = obj.lastPromise.finally(function(){ 
+
+					obj.lastPromise = obj.lastPromise.then(function(){
 						return obj[methods[index]](params[0], params[1], params[2], params[3], params[4]);
-					})	
-					
+					}, function(){
+						return obj[methods[index]](params[0], params[1], params[2], params[3], params[4]);
+					})
+
 					return obj.lastPromise;
 				}
-			})()	
+			})()
 		}
 	}
 })
